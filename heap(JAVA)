@@ -1,0 +1,127 @@
+import java.util.*;
+class bag
+{
+	static int n=0;
+	static int[] heap=new int [11];
+	
+	static int swap(int a, int b)
+	{
+		return a;
+	}
+	
+	
+	static int parent(int k)
+	{
+		return k/2;
+	}
+	
+	
+	static void shiftup(int k)
+	{
+		while( k>1 && heap[parent(k)]<heap[k])
+		{
+			heap[k]=swap(heap[parent(k)],heap[parent(k)]=heap[k]);
+			k=parent(k);
+		}
+	}
+	
+	static void shiftdown(int k)
+	{
+	while(2 * k <= n)
+	{
+		int j = 2 * k;
+		if(j < n && heap[j] < heap[j+1])
+			j++;
+		if (heap[k] < heap[j]){
+			heap[j]=swap(heap[k], heap[k]=heap[j]);
+		}
+		k = j;
+		}
+	}
+		
+	static void ins(int k)
+	{
+		if(n==k)
+			System.out.println("full");
+		else
+		{
+			heap[++n]=k;
+			shiftup(n);
+		}
+	}
+	
+	
+	static void display()
+	{
+		for(int i=1;i<n+1;i++)
+		{
+			System.out.print(heap[i]+" ");
+		}
+		System.out.println(" ");
+	}
+	
+	
+	static int extractMax()
+	{
+		if(n<1)
+		{
+			System.out.println("empty heap");
+			return -1;
+		}
+		else
+		{
+			int max=heap[1];
+			heap[n+1]=swap(heap[1],heap[1]=heap[n--]);
+			shiftdown(1);
+			return max;
+		}
+	}
+	
+	
+	static int getMax()
+	{
+		return heap[1];
+	}
+	static int increaseKey(int index, int value)
+	{
+		return 1;
+	}
+	static int changeKey(int index, int value){return 1;}
+	
+	
+	public static void main(String[] args)
+	{
+			Scanner sc=new Scanner(System.in);
+			
+			int ch, num, value, index;
+			while(true){
+			System.out.println("1.INSERT 2.get max 3.display  4.extract max 5.increase key  6.change key 7.EXIT");
+			System.out.println("ENTER CHOICE");
+				ch=sc.nextInt();
+				switch(ch){
+				case 1 : System.out.println( "ENTER NUMBER");
+				num=sc.nextInt();
+				ins(num);
+				break;
+				case 2 : System.out.println("MAX ELEMENT: "+ getMax());
+				break;
+				case 3 : display();
+				break;
+				case 4 : System.out.println ("MAX ELEMENT: "+ extractMax());
+				break;
+				case 5 : System.out.println ("ENTER VALUE AND INDEX");
+				value=sc.nextInt();
+				index=sc.nextInt();
+				increaseKey(index, value);
+				break;
+				case 6 : System.out.println ("ENTER VALUE AND INDEX");
+				value=sc.nextInt();
+				index=sc.nextInt();
+				changeKey(index, value);
+				break;
+				case 7 : break;
+			}
+		}
+	}
+}
+				
